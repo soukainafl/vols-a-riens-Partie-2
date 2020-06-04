@@ -1,6 +1,6 @@
 
- create database gestionvol;
- use gestionvol;
+ create database gestionvolV2;
+
 
 create table client
 (
@@ -24,7 +24,19 @@ create table vol
    dateVole             date,
    prix                 int,
    nombreplace           int,
+   statut               varchar(100),
    primary key (idvol)
+);
+create table compte
+(
+   idUser             int not null AUTO_INCREMENT,
+   nom               varchar(90),
+   prenom            varchar(123),
+   email             varchar(123),
+   telephone          int,
+   password           varchar(90),
+   statut             varchar(123),
+   primary key (idUser)
 );
 
 create table reservation
@@ -32,20 +44,11 @@ create table reservation
    idReservation        int  not null AUTO_INCREMENT,
    idClient             int not null ,
    idvol                int not null,
+   idUser               int not null,
    dateResr             date,
    primary key (idReservation) ,
    FOREIGN KEY (idClient) REFERENCES client(idClient) on update cascade on delete cascade,
-   FOREIGN KEY (idvol) REFERENCES vol(idvol) on update cascade on delete cascade
+   FOREIGN KEY (idvol) REFERENCES vol(idvol) on update cascade on delete cascade,
+   FOREIGN KEY (idUser) REFERENCES compte(idUser) on update cascade on delete cascade
 );
-create table login 
-( 
-idlogin int  primary key not null,
-name varchar(150),
-username varchar(150),
-password varchar(150),
-statut varchar(150) 
- )
 
-
-
- 

@@ -1,15 +1,20 @@
 <!DOCTYPE html>
+<?php  include('connexion.php');?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:700, 600,500,400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-     
+    
+    
+    
+  
     <style>
     body{
       overflow-x:hidden;
@@ -50,9 +55,36 @@
                 <a class="nav-link" href="confirmation.php">confirmation</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.php">login/inscription</a>
+                        <?php 
+                       include('class/classUser.php');
+                       session_start();
+                       $user=new user();
+                        if(!empty($_SESSION["user"])){
+                          
+                        $data=$user->sessionUser();
+
+                        ?>
+                <a class="nav-link" href="infoUtilisateur.php"><i class="fas fa-user-circle" style="font-size:30px;margin-top:-7px"></i>&nbsp<?php echo $data[0]['nom'];?></a>
+                <li class="nav-item">
+                <a  class="btn btn-outline-danger" href="logoutuser.php">log out</a>
               </li>
-              
+                <?php
+                 }
+                 elseif(!empty($_SESSION["admin"])){
+                  $data=$user->sessionAdmin();
+                   ?>
+                  <a class="nav-link" href="ajoutervol.php"><i class="fas fa-user-circle" style="font-size:30px;margin-top:-7px"></i>&nbsp<?php echo  $data[0]['nom'];?></a>
+                  <li class="nav-item">
+                <a  class="btn btn-outline-danger" href="logoutadmin.php">log out</a>
+              </li>
+                  <?php } 
+                  else{
+                    header('location:login.php');
+                  }
+                  ?>
+                
+              </li>
+             
           </ul>
         </div>
       </nav>

@@ -1,5 +1,5 @@
+
 <!DOCTYPE html>
-<?php  include('class/classConnexion.php');?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  
+    <link rel="stylesheet" href="styleReservation.css">
     <style>
     body{
       overflow-x:hidden;
@@ -25,13 +25,24 @@
         li > span{
           font-weight:bold;
         }
+
+        .container-fluid {
+    width: 80%;
+    margin-left: auto;
+    background-color: whitesmoke;
+    border-radius: 13px;
+    box-shadow: 2px 7px 21px -5px;
+
+}
+tbody
+{
+    background-color: dimgray;
+}
     </style>
 </head>
 
     <body>
-    <?php
-  
-    ?>
+ 
      <!-- Navigation -->
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.php"><img src="logo3.png" width="120" height="80" alt=""></a>
@@ -55,32 +66,20 @@
                        include('class/classuser.php');
                        session_start();
                        $user=new user();
-                        if(!empty($_SESSION["user"])){
-                          
-                        $data=$user->sessionUser();
-
+                       if(!empty($_SESSION["user"])){
+                       $data=$user->sessionUser();
                         ?>
-                <a class="nav-link" href="infoutilisateur.php"><i class="fas fa-user-circle" style="font-size:30px;margin-top:-7px"></i>&nbsp<?php echo $data[0]['nom'];?></a>
-                <li class="nav-item">
-                <a  class="btn btn-outline-danger" href="logoutuser.php">log out</a>
-              </li>
+                <a class="nav-link" href="#"><i class="fas fa-user-circle" style="font-size:30px;margin-top:-7px"></i>&nbsp<?php echo $data[0]['nom'];?></a>
                 <?php
                  }
-                 elseif(!empty($_SESSION["admin"])){
-                  $data=$user->sessionAdmin();
-                   ?>
-                  <a class="nav-link" href="ajoutervol.php"><i class="fas fa-user-circle" style="font-size:30px;margin-top:-7px"></i>&nbsp<?php echo  $data[0]['nom'];?></a>
-                  <li class="nav-item">
+                 else{
+                   header("Location:login.php");
+                 }
+                ?>
+              </li>
+              <li class="nav-item">
                 <a  class="btn btn-outline-danger" href="logoutadmin.php">log out</a>
               </li>
-                  <?php } 
-                  else{
-                    header('location:login.php');
-                  }
-                  ?>
-                
-              </li>
-             
           </ul>
         </div>
       </nav>
@@ -117,72 +116,31 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
-          </div>
-  <!-- Page Content -->
-  <div class="container-fluid px-0">
-
-    <h1 class="col-12 my-4 d-flex justify-content-center">Reserver maintenant</h1>
-
-    <div class="container-fluid ">
-<div class="row "> 
-    <div class="jumbotron jumbotron w-100" >
-        <div class="container">
-        <form method="POST" class="col-12">
-            <div class="row d-flex justify-content-center">
+                </div>
+<?php
+  
+    $user=new user();
+    $data=$user->getUser();
+  
+?>
+          <br><br>
+<div class="container-fluid well span6">
+	<div class="row-fluid">
+        <div class="span2" >
+		    <img src="https://secure.gravatar.com/avatar/de9b11d0f9c0569ba917393ed5e5b3ab?s=140&r=g&d=mm" class="img-circle">
+        </div>
+        
+        <div class="span8">
+            <h3> Bienvenue User : <?php echo $data[0]['nom'] ?></h3>
+            <h6>Prenom  :<?php echo $data[0]['prenom'] ?> </h6>
+            <h6>Email  :<?php echo $data[0]['email'] ?></h6>
+            <h6>Telephone  :<?php echo $data[0]['telephone'] ?></h6>
+            <h6>Satut  :<?php echo $data[0]['statut'] ?></h6>
+           
 
            
-          <div class="col-5" class="display-6">Lieu depart <input type="text" class="form-control" name="lieu"></div>
-          <div class="col-5"> Destination <input type="text" class="form-control" name="destination"></div>
-         <div class="col-12 d-flex justify-content-center my-3">
-             <input type="submit" class="btn btn-primary" value="rechercher" name="recherche">
-            </div>
         </div>
-        </div>
-      </div>
-      </div>
-      </form>
-</div>
-</div>
-<div class="container">
-    <div class="row">
-    <?php
-    include('class/classvol.php');
-     if(isset($_POST["recherche"]))
-     {
-     $vol=new vol();
-     if(isset($_POST['lieu']) && isset($_POST['destination'])){
-     $data= $vol->recherche($_POST['lieu'],$_POST['destination']);
-     foreach($data as $row){
-     ?>
-      <div class="col-lg-4 col-sm-6 ">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="img2.jpg" alt="" id="image"></a>
-                 <div class="card-body">
-                 <h5 class="card-title offset-2" ><?php echo $row['lieuDepart']; ?>-<?php echo $row['destination']; ?></h5>
-                 <p class="card-text"></p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><span >date</span>:<?php echo $row['dateVole'];?></li>
-                    <li class="list-group-item"><span>nombre place</span>:<?php echo $row['nombreplace'];?></li>
-             <li class="list-group-item"><span>prix</span>: <?php echo $row['prix']; ?></li>
-                  </ul>
-              <div class="card-body">
-               <a href="reservation.php?idvol=<?php echo $row['idvol']; ?>" class="btn btn-primary btn-md offset-4" name="reserver">reserver</a> 
-                </div>    
-        </div>
-      </div>
-    <?php }
-     }
-   } 
-   ?>
-     
-    
-    </div>
-    </div>
-    <!-- /.row -->
-    <!-- Features Section -->
-   </div>
-  <!-- /.container -->
-<?php include('footer.php'); ?>
 
- 
+  
+</div>
+</div>

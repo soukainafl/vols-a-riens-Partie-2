@@ -13,30 +13,46 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <body>
-		<?php
-	include("class/classuser.php");
-    if(isset($_POST["username"]) && isset($_POST["password"])){
-        $userL=$_POST["username"];
-        $password=$_POST["password"];
+<style>
+.loginbox
+{
+    height: 653px;
+    top: 80%;
+    width: 400px;
+}
 
-      $user=new user();
-      $user->login($userL,$password);
-    }
-    ?>
+</style>
+<?php
+  include('class/classuser.php');
+  $user=new user();
+     if(isset($_POST['ajouterUser'])){
+       $nom=$_POST["nom"];
+       $prenom=$_POST["prenom"];
+       $email=$_POST["email"];
+       $telephone=$_POST["telephone"];
+       $password=$_POST["password"];
+     $user->insertUser($nom,$prenom,$email,$telephone,$password);
+     }
+  ?>
 
 	<div class="loginbox">
 		<img src="https://www.vijayyadav.tk/wp-content/uploads/2020/05/avatar.png" class="avatar">
-		<h1>Login Here</h1>
+		<h1> Sign Up  Here</h1>
 		<form  method="POST">
-			<p>Email</p>
-			<input type="text" name="username" placeholder="Username">
+			<p>Nom</p>
+			<input type="text" name="nom" placeholder="Username">
+            <p>Prenom</p>
+			<input type="text" name="prenom" placeholder="Username">
+            <p>Email</p>
+			<input type="email" name="email" placeholder="Username">
+            <p>Telephone</p>
+			<input type="text" name="telephone" placeholder="Username">
 			<p>Password</p>
 			<input type="Password" name="password" placeholder="Enter Password">
-			<input type="submit" name="login" value="login">
-			<a href="sign up.php">Sign Up</a><br>
+			<input type="submit" name="ajouterUser" value="sign up">
+			<a href="login.php">login</a><br>
 	
 		</form>
 	</div>
 </body>
 </html>
-	
