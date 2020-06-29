@@ -7,7 +7,7 @@ Après avoir démarré Apache et MySQL dans XAMPP, suivez les étapes suivantes
 
 1ère étape: extraire le fichier.</br>
 2e étape: copier le dossier principal du projet.</br>
-3e étape: coller dans xampp / htdocs /localhost/gestion-des-r-servations-des-vols-a-riens-Partie-2. </br>
+3e étape: coller dans xampp / htdocs /gestion-des-r-servations-des-vols-a-riens-Partie-2. </br>
 Maintenant, connexion à la base de données
 
   4ème étape: ouvrez un navigateur et accédez à l'URL "http: // localhost / phpmyadmin /" </br>
@@ -17,7 +17,7 @@ Maintenant, connexion à la base de données
 
 Après avoir créé la base de données,cliquez sur Exécuter </br>
 
-  8ème étape: ouvrez un navigateur et accédez à l'URL "http://localhost/gestion-des-r-servations-des-vols-a-riens-Partie-2/ajoutervol.php/login.php </br>
+  8ème étape: ouvrez un navigateur et accédez à l'URL "http://localhost/gestion-des-r-servations-des-vols-a-riens-Partie-2/login.php"</br>
   pour teste le projet : </br>
 Admin </br>
 Email : soukaina@gmail.com <br>
