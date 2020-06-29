@@ -13,7 +13,7 @@ Maintenant, connexion à la base de données
   4ème étape: ouvrez un navigateur et accédez à l'URL "http: // localhost / phpmyadmin /" </br>
   5ème étape: Ensuite, cliquez sur l'onglet bases de données </br>
   6ème étape: créer une base de données nommant "gestionvolV2" puis cliquer sur l'onglet d'importation </br>
-  7ème étape: Cliquez sur parcourir le fichier et sélectionnez le fichier "basedonnee.sql" qui se trouve dans le dossier "basedonnee"</br>
+  7ème étape: Cliquez sur parcourir le fichier et sélectionnez le fichier "basedonnee.sql" qui se trouve dans le dossier "database"</br>
 
 Après avoir créé la base de données,cliquez sur Exécuter </br>
 
